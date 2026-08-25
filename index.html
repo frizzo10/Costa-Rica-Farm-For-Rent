@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Dosel — A Private Cloud Forest Estate, Costa Rica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canopy: #1E2E22;
+    --canopy-deep: #16221A;
+    --parchment: #EDE6D3;
+    --parchment-dim: #E3DAC2;
+    --clay: #A9502F;
+    --brass: #C39A56;
+    --ink: #1B1B16;
+    --cream-text: #F3EFE2;
+    --line: rgba(195,154,86,0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--canopy);
+    color: var(--cream-text);
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color: var(--brass);
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 40px;
+    transition: background 0.4s ease, padding 0.4s ease, box-shadow .4s ease;
+  }
+  nav.scrolled{
+    background: rgba(22,34,26,0.92);
+    backdrop-filter: blur(8px);
+    padding:14px 40px;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    letter-spacing:0.02em;
+    color: var(--cream-text);
+  }
+  .navlinks{display:flex; gap:34px; font-size:0.82rem; letter-spacing:0.04em;}
+  .navlinks a{position:relative; padding-bottom:4px; opacity:0.85; transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .navlinks a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--brass); transform:scaleX(0); transform-origin:left;
+    transition:transform .3s ease;
+  }
+  .navlinks a:hover::after{transform:scaleX(1);}
+  @media (max-width:760px){ .navlinks{display:none;} }
+
+  /* PLACEHOLDER PHOTO BLOCK */
+  .ph{
+    position:relative;
+    background:
+      linear-gradient(155deg, rgba(195,154,86,0.16), rgba(195,154,86,0) 55%),
+      repeating-linear-gradient(135deg, rgba(243,239,226,0.05) 0 2px, transparent 2px 26px),
+      linear-gradient(160deg, #26382B, #142019);
+    border:1px solid var(--line);
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+  }
+  .ph .ph-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color: rgba(243,239,226,0.55);
+    padding:14px 16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .ph .ph-tag svg{width:15px; height:15px; opacity:0.7;}
+  .ph img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block;
+  }
+  .ph .ph-tag{
+    position:relative; z-index:2;
+    background:linear-gradient(0deg, rgba(20,32,25,0.65), rgba(20,32,25,0));
+    width:100%;
+  }
+  .ph:has(img) .ph-tag svg{display:none;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:0 0 64px;
+  }
+  .hero .ph{position:absolute; inset:0; border:none;}
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(0deg, var(--canopy) 4%, rgba(30,46,34,0.35) 42%, rgba(30,46,34,0.55) 100%);
+  }
+  .hero-content{position:relative; z-index:2;}
+  .hero-content .wrap{padding-top:120px;}
+  .hero h1{
+    font-size:clamp(3.2rem, 9vw, 6.4rem);
+    font-style:italic;
+    line-height:0.96;
+    color:var(--cream-text);
+  }
+  .hero-sub{
+    max-width:520px;
+    margin-top:22px;
+    font-size:1.05rem;
+    color: rgba(243,239,226,0.82);
+    font-weight:300;
+  }
+  .hero-meta{
+    display:flex; gap:28px; flex-wrap:wrap;
+    margin-top:34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    color: var(--brass);
+    text-transform:uppercase;
+  }
+  .hero-meta span{opacity:0.9;}
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    margin-top:38px;
+    padding:15px 28px;
+    border:1px solid var(--brass);
+    color: var(--cream-text);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    transition: background .3s ease, color .3s ease;
+  }
+  .cta:hover{background:var(--brass); color:var(--canopy-deep);}
+
+  /* SECTION SHELL */
+  section{position:relative; padding:120px 0;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-head h2{
+    font-size:clamp(2.1rem, 4vw, 3rem);
+    margin-top:14px;
+    color: var(--cream-text);
+  }
+  .section-head p{margin-top:18px; color:rgba(243,239,226,0.75); font-size:1rem; max-width:520px;}
+
+  /* slat divider - signature architectural motif (hacienda corredor posts) */
+  .slats{
+    display:flex; justify-content:space-between;
+    padding:0 40px; margin:0 auto; max-width:1180px;
+    opacity:0.5;
+  }
+  .slats span{width:2px; height:34px; background:var(--brass);}
+
+  /* THE HOUSE — room cards w/ slat rhythm */
+  .rooms{background:var(--canopy-deep);}
+  .room-row{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:0; align-items:stretch;
+    border-top:1px solid var(--line);
+  }
+  .room-row:last-child{border-bottom:1px solid var(--line);}
+  .room-row .ph{aspect-ratio:4/3; border:none;}
+  .room-copy{
+    padding:52px 56px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative;
+  }
+  .room-copy .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; color:var(--brass); letter-spacing:0.15em;
+  }
+  .room-copy h3{font-size:1.7rem; margin-top:10px; color:var(--cream-text); font-style:italic;}
+  .room-copy p{margin-top:14px; color:rgba(243,239,226,0.72); font-size:0.95rem; max-width:420px;}
+  .room-row:nth-child(even) .ph{order:2;}
+  @media (max-width:820px){
+    .room-row{grid-template-columns:1fr;}
+    .room-row:nth-child(even) .ph{order:0;}
+    .room-copy{padding:40px 24px;}
+  }
+
+  /* ESTATE MAP — signature element */
+  .estate{
+    background:var(--parchment);
+    color:var(--ink);
+    padding:120px 0;
+  }
+  .estate .eyebrow{color:var(--clay);}
+  .estate .section-head p{color:rgba(27,27,22,0.7);}
+  .estate .section-head h2{color:var(--ink);}
+  .map-frame{
+    border:1px solid rgba(27,27,22,0.18);
+    background: var(--parchment-dim);
+    padding:24px;
+  }
+  .map-frame svg{width:100%; height:auto; display:block;}
+  .map-legend{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:18px; margin-top:28px;
+  }
+  .map-legend div{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.04em; color: rgba(27,27,22,0.75);
+    display:flex; gap:10px; align-items:baseline;
+  }
+  .map-legend b{color:var(--clay); font-family:'Fraunces', serif; font-style:italic; font-size:1rem;}
+
+  /* AMENITIES STRIP */
+  .amenities{
+    background: var(--canopy);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:64px 0;
+  }
+  .amen-grid{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:8px;
+    text-align:center;
+  }
+  .amen-grid div{padding:18px 8px;}
+  .amen-grid .n{font-family:'Fraunces', serif; font-style:italic; font-size:2.1rem; color:var(--cream-text);}
+  .amen-grid .l{font-family:'IBM Plex Mono', monospace; font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--brass); margin-top:6px; display:block;}
+  @media (max-width:820px){ .amen-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:480px){ .amen-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* GROUNDS */
+  .grounds-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center;
+  }
+  .grounds-grid .ph{aspect-ratio:3/4;}
+  .grounds-text p{color:rgba(243,239,226,0.78); margin-top:16px; font-size:0.98rem;}
+  @media (max-width:820px){ .grounds-grid{grid-template-columns:1fr;} }
+
+  /* THIRDHOME PITCH */
+  .pitch{
+    background:var(--canopy-deep);
+    text-align:center;
+    padding:140px 0;
+    position:relative;
+  }
+  .pitch blockquote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:clamp(1.6rem, 3.4vw, 2.5rem);
+    max-width:820px; margin:0 auto; color:var(--cream-text);
+    line-height:1.35;
+  }
+  .pitch .attrib{
+    margin-top:28px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.1em;
+    color:var(--brass); text-transform:uppercase;
+  }
+  .pitch-note{
+    max-width:600px; margin:36px auto 0; color:rgba(243,239,226,0.65); font-size:0.92rem;
+  }
+
+  /* GALLERY */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:150px; gap:10px;
+    grid-auto-flow:dense;
+  }
+  .gallery-grid .ph:nth-child(1){grid-column:span 2; grid-row:span 2;}
+  .gallery-grid .ph:nth-child(4){grid-column:span 2;}
+  .gallery-grid .ph:nth-child(6){grid-row:span 2;}
+  @media (max-width:820px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:130px;}
+    .gallery-grid .ph:nth-child(1){grid-column:span 2; grid-row:span 1;}
+  }
+
+  /* INQUIRE / FOOTER */
+  .inquire{background:var(--parchment); color:var(--ink); padding:120px 0 60px;}
+  .inquire .eyebrow{color:var(--clay);}
+  .inquire h2{color:var(--ink); font-size:clamp(2.1rem,4vw,3rem); margin-top:14px;}
+  .inquire-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; margin-top:56px;}
+  .inquire-grid p{color:rgba(27,27,22,0.72); max-width:400px;}
+  .fact-list{margin-top:28px; border-top:1px solid rgba(27,27,22,0.18);}
+  .fact-list div{
+    display:flex; justify-content:space-between;
+    padding:14px 0; border-bottom:1px solid rgba(27,27,22,0.18);
+    font-size:0.92rem;
+  }
+  .fact-list span:first-child{color:rgba(27,27,22,0.55); font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase;}
+  form{display:flex; flex-direction:column; gap:16px;}
+  form input, form textarea{
+    background:transparent; border:none; border-bottom:1px solid rgba(27,27,22,0.3);
+    padding:12px 2px; font-family:'Work Sans', sans-serif; font-size:0.98rem; color:var(--ink);
+  }
+  form input::placeholder, form textarea::placeholder{color:rgba(27,27,22,0.45);}
+  form input:focus, form textarea:focus{outline:none; border-bottom-color:var(--clay);}
+  form button{
+    margin-top:10px; align-self:flex-start;
+    background:var(--clay); color:var(--parchment);
+    border:none; padding:15px 30px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.74rem; letter-spacing:0.12em; text-transform:uppercase;
+    cursor:pointer; transition:background .25s ease;
+  }
+  form button:hover{background:var(--ink);}
+  footer{
+    margin-top:100px; padding-top:28px; border-top:1px solid rgba(27,27,22,0.18);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.08em;
+    color:rgba(27,27,22,0.55); text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wordmark">Casa Dosel</div>
+  <div class="navlinks">
+    <a href="#house">The House</a>
+    <a href="#estate">The Estate</a>
+    <a href="#grounds">Grounds</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#inquire">Inquire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="ph">
+    <img src="images/hero-dusk-garden.jpg" alt="Casa Dosel garden terrace at dusk, with a stone fire feature, hummingbird rain chains, and mountains beyond" loading="eager">
+  </div>
+  <div class="hero-content">
+    <div class="wrap">
+      <div class="eyebrow">Tinamastes · Central Costa Rica</div>
+      <h1>Casa Dosel</h1>
+      <p class="hero-sub">A private hacienda-style farmhouse suspended above the cloud forest canopy, on a working single-source coffee estate between the Pérez Zeledón valley and the Pacific coast.</p>
+      <div class="hero-meta">
+        <span>1,020m elevation</span>
+        <span>1 bed · 1 bath</span>
+        <span>Sleeps 4</span>
+        <span>Whole-home, single party</span>
+      </div>
+      <a class="cta" href="#inquire">Request Access →</a>
+    </div>
+  </div>
+</header>
+
+<!-- THE HOUSE -->
+<section id="house" class="rooms">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The House</div>
+      <h2>Built to disappear into the hillside</h2>
+      <p>Reclaimed hardwood, deep eaves, and screened corredores designed for the mountain's constant cross-breeze — a house that keeps the jungle close without ever letting it in.</p>
+    </div>
+  </div>
+
+  <div class="room-row">
+    <div class="ph"><img src="images/room-sala.jpg" alt="Living room with leather sofas, wood-clad vaulted ceiling, and forest-facing windows"></div>
+    <div class="room-copy">
+      <div class="num">01 — Living Pavilion</div>
+      <h3>The Sala</h3>
+      <p>A vaulted, wood-lined living room under a high pitched roof, screened windows on two sides framing the jungle beyond. A queen pullout sofa bed sleeps a second couple or the kids. Ceiling fans, no air conditioning needed above 1,000m.</p>
+    </div>
+  </div>
+
+  <div class="room-row">
+    <div class="ph"><img src="images/room-primary-suite.jpg" alt="Primary bedroom with a king bed, floral quilt, and a forest-facing window"></div>
+    <div class="room-copy">
+      <div class="num">02 — Primary Suite</div>
+      <h3>The Nido</h3>
+      <p>King bed, wood-beamed ceiling, and a window that opens straight onto the canopy — cool mountain air moving through from dusk until dawn.</p>
+    </div>
+  </div>
+
+  <div class="room-row">
+    <div class="ph"><img src="images/room-terrace-spa.jpg" alt="Private stone-edged plunge spa on a wooden sun deck, surrounded by jungle"></div>
+    <div class="room-copy">
+      <div class="num">03 — The Terrace</div>
+      <h3>Plunge Spa &amp; Sun Deck</h3>
+      <p>A stone-carved plunge pool and sun deck cut into the garden, banana leaves and jungle pressing in on every side. No neighbors in sight, no sound but the birds.</p>
+    </div>
+  </div>
+
+  <div class="room-row">
+    <div class="ph"><img src="images/room-kitchen.jpg" alt="Kitchen with granite counters, stainless appliances, and mountain views through the window"></div>
+    <div class="room-copy">
+      <div class="num">04 — Kitchen &amp; Table</div>
+      <h3>The Cocina</h3>
+      <p>Full kitchen with granite counters and a bar for four, the mountains framed in the window over the sink — stocked from the farm and the San Isidro market.</p>
+    </div>
+  </div>
+
+  <div class="room-row">
+    <div class="ph"><img src="images/room-pavilion.jpg" alt="Open-air wooden pavilion with built-in bench seating beside a jungle stream"></div>
+    <div class="room-copy">
+      <div class="num">05 — The Creekside Pavilion</div>
+      <h3>El Rancho</h3>
+      <p>A covered wooden pavilion built over its own stream, strung with market lights and built-in bench seating — the spot for an evening drink once the sun drops behind the ridge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ESTATE MAP — signature element -->
+<section id="estate" class="estate">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Estate</div>
+      <h2>A working coffee farm, mapped</h2>
+      <p>Casa Dosel sits at the top of a 2.5-acre single-source Arabica estate — the same land, the same cloud forest boundary, quietly organized around the house.</p>
+    </div>
+
+    <div class="map-frame">
+      <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .mline{fill:none; stroke:#1B1B16; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
+            .mline-thin{fill:none; stroke:#1B1B16; stroke-width:0.8; opacity:0.5;}
+            .mfill{fill:#A9502F;}
+            .mlabel{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.06em; fill:#1B1B16;}
+            .mlabel-num{font-family:'Fraunces', serif; font-style:italic; font-size:15px; fill:#A9502F;}
+          </style>
+        </defs>
+
+        <!-- forest boundary -->
+        <path class="mline-thin" d="M30 40 C150 20, 300 30, 420 15 C620 5, 800 30, 970 60 L970 520 C700 545, 400 550, 150 530 C80 525, 40 500, 30 460 Z"/>
+        <text x="55" y="70" class="mlabel">CLOUD FOREST BOUNDARY</text>
+
+        <!-- access road -->
+        <path class="mline" d="M20 480 C120 460, 200 440, 260 400 C310 365, 330 330, 360 300"/>
+        <text x="30" y="500" class="mlabel">ACCESS ROAD</text>
+
+        <!-- coffee rows -->
+        <g class="mline-thin">
+          <path d="M400 380 L620 340"/>
+          <path d="M410 410 L630 370"/>
+          <path d="M420 440 L640 400"/>
+          <path d="M430 470 L650 430"/>
+          <path d="M440 500 L660 460"/>
+        </g>
+        <text x="440" y="530" class="mlabel">COFFEE ROWS · 4,000 PLANTS</text>
+
+        <!-- house -->
+        <rect class="mline" x="560" y="180" width="140" height="90" rx="2"/>
+        <path class="mline" d="M550 180 L630 130 L710 180"/>
+        <circle class="mfill" cx="630" cy="225" r="4"/>
+        <text x="565" y="300" class="mlabel-num">Casa Dosel</text>
+
+        <!-- pool/terrace -->
+        <ellipse class="mline" cx="640" cy="310" rx="60" ry="20"/>
+        <text x="590" y="345" class="mlabel">PLUNGE POOL &amp; TERRACE</text>
+
+        <!-- garage/casita -->
+        <rect class="mline" x="740" y="160" width="60" height="45" rx="2"/>
+        <text x="735" y="220" class="mlabel">GARAGE</text>
+
+        <!-- ridgeline -->
+        <path class="mline-thin" d="M760 60 C850 90, 900 140, 940 130"/>
+        <text x="800" y="55" class="mlabel">RIDGELINE · 1,020M</text>
+
+        <!-- compass -->
+        <g transform="translate(900,470)">
+          <circle class="mline-thin" cx="0" cy="0" r="26"/>
+          <path class="mline" d="M0 -20 L5 0 L0 20 L-5 0 Z"/>
+          <text x="-4" y="-32" class="mlabel">N</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="map-legend">
+      <div><b>2.5</b> acres, single owner</div>
+      <div><b>1,020m</b> elevation at the house</div>
+      <div><b>4,000</b> Arabica plants surrounding</div>
+      <div><b>1</b> private access road, gated</div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES STRIP -->
+<section class="amenities" style="padding:64px 0;">
+  <div class="wrap amen-grid">
+    <div><div class="n">1</div><span class="l">Bedroom</span></div>
+    <div><div class="n">1</div><span class="l">Bathroom</span></div>
+    <div><div class="n">4</div><span class="l">Sleeps</span></div>
+    <div><div class="n">2.5</div><span class="l">Acres</span></div>
+    <div><div class="n">1,020m</div><span class="l">Elevation</span></div>
+    <div><div class="n">25min</div><span class="l">To Dominical Beach</span></div>
+  </div>
+</section>
+
+<!-- GROUNDS -->
+<section id="grounds">
+  <div class="wrap grounds-grid">
+    <div class="ph"><img src="images/grounds-aerial-farmhouse.jpg" alt="Aerial view of Casa Dosel and the surrounding coffee rows on a jungle hillside"></div>
+    <div class="grounds-text">
+      <div class="eyebrow">Grounds &amp; Setting</div>
+      <h2 style="font-size:clamp(1.9rem,3.4vw,2.6rem); margin-top:12px; color:var(--cream-text);">Between the mountains and the sea</h2>
+      <p>Tinamastes sits in a mountainous corridor between San Isidro de El General and the Pacific — close enough to Dominical and Uvita for a beach day, high enough to sleep under a blanket every night of the year.</p>
+      <p>The land is farmed organically alongside the working Arabica plants that surround the house — shade trees, citrus, and banana draw scarlet macaws to nest freely in the canopy above the terrace.</p>
+      <p>There is one gated road in. No through traffic, no shared driveway, no other structures visible from the house.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THIRDHOME PITCH -->
+<section class="pitch">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:26px;">A Note for Thirdhome</div>
+    <blockquote>"Casa Dosel isn't a listing carved out of a larger business — it's a single family's private mountain house, offered the way we'd want to be hosted ourselves."</blockquote>
+    <div class="attrib">Frank Rizzo, Owner</div>
+    <p class="pitch-note">We're applying to Thirdhome because we'd rather trade stays with member families than run a commercial rental. Casa Dosel sits on the same land as our working coffee estate, Café Franco — one property, two stories, both hands-on and both ours.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Gallery</div>
+      <h2>A house still being photographed</h2>
+      <p>Final photography is underway on site — this gallery will fill in over the coming weeks.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="ph"><img src="images/gallery-aerial-overview.jpg" alt="Aerial overview of the farmhouse, guest cottage, and gardens"><div class="ph-tag">Aerial · Farm overview</div></div>
+      <div class="ph"><img src="images/gallery-aerial-pool.jpg" alt="Aerial view of the stone plunge pool and vine-covered pergola"><div class="ph-tag">Terrace · Plunge pool</div></div>
+      <div class="ph"><img src="images/gallery-bougainvillea.jpg" alt="Close-up of pink bougainvillea blooms on the property"><div class="ph-tag">Grounds · Bougainvillea in bloom</div></div>
+      <div class="ph"><img src="images/gallery-fire-circle.jpg" alt="Stone fire pit glowing at dusk, framed by jungle"><div class="ph-tag">Evening · The Fire Circle</div></div>
+      <div class="ph"><img src="images/gallery-facade.jpg" alt="Farmhouse exterior with orange roof, seen from above the coffee rows"><div class="ph-tag">Exterior · Farmhouse facade</div></div>
+      <div class="ph"><img src="images/gallery-coffee-rows.jpg" alt="Aerial view of young coffee rows on the hillside"><div class="ph-tag">Grounds · Coffee rows from above</div></div>
+      <div class="ph"><img src="images/gallery-ridge-view.jpg" alt="View of the cloud forest ridgeline from the property"><div class="ph-tag">The Ridge · Cloud forest view</div></div>
+      <div class="ph"><img src="images/gallery-coffee-cherries.jpg" alt="Close-up of green Arabica coffee cherries on the branch"><div class="ph-tag">The Farm · Arabica cherries</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRE -->
+<section id="inquire" class="inquire">
+  <div class="wrap">
+    <div class="eyebrow">Inquire</div>
+    <h2>Plan a stay at Casa Dosel</h2>
+
+    <div class="inquire-grid">
+      <div>
+        <p>For Thirdhome members and private inquiries — we typically respond within 48 hours with availability and access details.</p>
+        <div class="fact-list">
+          <div><span>Location</span><span>Tinamastes, Costa Rica</span></div>
+          <div><span>Nearest Town</span><span>San Isidro de El General</span></div>
+          <div><span>Nearest Beach</span><span>Dominical, ~25 min</span></div>
+          <div><span>Booking Type</span><span>Whole-home, single party</span></div>
+          <div><span>Sister Property</span><span>Café Franco Coffee Estate</span></div>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Full name" required>
+        <input type="email" placeholder="Email address" required>
+        <input type="text" placeholder="Thirdhome member ID (if applicable)">
+        <textarea rows="4" placeholder="Dates or questions"></textarea>
+        <button type="submit">Send Inquiry</button>
+      </form>
+    </div>
+
+    <footer>
+      <span>Casa Dosel · Tinamastes, Costa Rica</span>
+      <span>On the grounds of Café Franco</span>
+    </footer>
+  </div>
+</section>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
