@@ -288,6 +288,29 @@
     .detail-strip{grid-template-columns:repeat(2,1fr);}
   }
 
+  /* NAUYACA WATERFALLS BANNER */
+  .waterfall-banner{padding:0;}
+  .waterfall-photo{
+    position:relative; height:70vh; min-height:440px; max-height:720px;
+    border:none;
+  }
+  .waterfall-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,32,25,0.05) 40%, rgba(20,32,25,0.75) 100%);
+  }
+  .waterfall-caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:3;
+    padding:48px 32px;
+    max-width:1180px; margin:0 auto;
+  }
+  .waterfall-caption h3{
+    font-size:clamp(2rem, 4vw, 3rem); font-style:italic; color:var(--cream-text); margin-top:10px;
+  }
+  .waterfall-caption p{
+    margin-top:14px; max-width:480px; color:rgba(243,239,226,0.82); font-size:0.98rem;
+  }
+
   /* THIRDHOME PITCH */
   .pitch{
     background:
@@ -504,10 +527,22 @@
   </div>
 
   <div class="detail-strip">
-    <div class="ph"><img src="images/grounds-waterfall.jpg" alt="Aerial view of a waterfall in the Diamante Valley cloud forest near the property"></div>
     <div class="ph"><img src="images/gallery-ridge-view.jpg" alt="View of the cloud forest ridgeline from the property"></div>
     <div class="ph"><img src="images/grounds-pizote.jpg" alt="A pizote (coati) foraging in the grass at the edge of the forest"></div>
+    <div class="ph"><img src="images/gallery-bougainvillea.jpg" alt="Close-up of pink bougainvillea blooms on the property"></div>
     <div class="ph"><img src="images/gallery-coffee-cherries.jpg" alt="Close-up of green Arabica coffee cherries on the branch"></div>
+  </div>
+</section>
+
+<!-- NAUYACA WATERFALLS — full-bleed feature -->
+<section class="waterfall-banner">
+  <div class="ph waterfall-photo">
+    <img src="images/grounds-waterfall.jpg" alt="Aerial view of Nauyaca Waterfalls in the Diamante Valley cloud forest">
+    <div class="waterfall-caption">
+      <div class="eyebrow">3km From The House</div>
+      <h3>Nauyaca Waterfalls</h3>
+      <p>Twin cascades dropping through primary cloud forest — one of the region's best-known natural landmarks, close enough for a morning hike and back before lunch.</p>
+    </div>
   </div>
 </section>
 
