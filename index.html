@@ -235,6 +235,7 @@
     padding:24px;
   }
   .map-frame svg{width:100%; height:auto; display:block;}
+  .map-frame video{width:100%; height:auto; display:block; background:#000;}
   .map-legend{
     display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
     gap:18px; margin-top:28px;
@@ -446,67 +447,19 @@
     <div class="estate-intro">
       <div class="section-head" style="margin-bottom:0;">
         <div class="eyebrow">The Estate</div>
-        <h2>A working coffee farm, mapped</h2>
+        <h2>A working coffee farm, from above</h2>
         <p>Casa Dosel sits at the top of a 2.5-acre single-source Arabica estate — the same land, the same cloud forest boundary, quietly organized around the house.</p>
       </div>
       <div class="ph estate-photo"><img src="images/gallery-facade.jpg" alt="Casa Dosel farmhouse exterior with orange roof, seen from above the coffee rows"></div>
     </div>
 
     <div class="map-frame">
-      <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <style>
-            .mline{fill:none; stroke:#1B1B16; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
-            .mline-thin{fill:none; stroke:#1B1B16; stroke-width:0.8; opacity:0.5;}
-            .mfill{fill:#A9502F;}
-            .mlabel{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.06em; fill:#1B1B16;}
-            .mlabel-num{font-family:'Fraunces', serif; font-style:italic; font-size:15px; fill:#A9502F;}
-          </style>
-        </defs>
-
-        <!-- forest boundary -->
-        <path class="mline-thin" d="M30 40 C150 20, 300 30, 420 15 C620 5, 800 30, 970 60 L970 520 C700 545, 400 550, 150 530 C80 525, 40 500, 30 460 Z"/>
-        <text x="55" y="70" class="mlabel">CLOUD FOREST BOUNDARY</text>
-
-        <!-- access road -->
-        <path class="mline" d="M20 480 C120 460, 200 440, 260 400 C310 365, 330 330, 360 300"/>
-        <text x="30" y="500" class="mlabel">ACCESS ROAD</text>
-
-        <!-- coffee rows -->
-        <g class="mline-thin">
-          <path d="M400 380 L620 340"/>
-          <path d="M410 410 L630 370"/>
-          <path d="M420 440 L640 400"/>
-          <path d="M430 470 L650 430"/>
-          <path d="M440 500 L660 460"/>
-        </g>
-        <text x="440" y="530" class="mlabel">COFFEE ROWS · 4,000 PLANTS</text>
-
-        <!-- house -->
-        <rect class="mline" x="560" y="180" width="140" height="90" rx="2"/>
-        <path class="mline" d="M550 180 L630 130 L710 180"/>
-        <circle class="mfill" cx="630" cy="225" r="4"/>
-        <text x="565" y="300" class="mlabel-num">Casa Dosel</text>
-
-        <!-- pool/terrace -->
-        <ellipse class="mline" cx="640" cy="310" rx="60" ry="20"/>
-        <text x="590" y="345" class="mlabel">PLUNGE POOL &amp; TERRACE</text>
-
-        <!-- garage/casita -->
-        <rect class="mline" x="740" y="160" width="60" height="45" rx="2"/>
-        <text x="735" y="220" class="mlabel">GARAGE</text>
-
-        <!-- ridgeline -->
-        <path class="mline-thin" d="M760 60 C850 90, 900 140, 940 130"/>
-        <text x="800" y="55" class="mlabel">RIDGELINE · 550M</text>
-
-        <!-- compass -->
-        <g transform="translate(900,470)">
-          <circle class="mline-thin" cx="0" cy="0" r="26"/>
-          <path class="mline" d="M0 -20 L5 0 L0 20 L-5 0 Z"/>
-          <text x="-4" y="-32" class="mlabel">N</text>
-        </g>
-      </svg>
+      <video
+        src="images/estate-flyover.mp4"
+        poster="images/estate-flyover-poster.jpg"
+        autoplay muted loop playsinline
+        aria-label="Aerial flyover of Casa Dosel and the surrounding coffee estate">
+      </video>
     </div>
 
     <div class="map-legend">
